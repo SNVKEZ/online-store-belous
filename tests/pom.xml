@@ -7,15 +7,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>delivery-service</artifactId>
+    <artifactId>tests</artifactId>
     <packaging>jar</packaging>
 
-    <name>delivery-service</name>
+    <name>tests</name>
     <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
 
 </project>
