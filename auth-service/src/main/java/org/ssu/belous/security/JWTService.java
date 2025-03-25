@@ -48,7 +48,7 @@ public class JWTService {
         }
     }
 
-    public String generateToken(String username, List<String> roles) {
+    public String generateToken(String username, String roles) {
         return JWT.create()
                 .withSubject(Objects.requireNonNull(SUBJECT, "Ключ SUBJECT не может быть null"))
                 .withClaim(Objects.requireNonNull(USERNAME_KEY, "Ключ USERNAME_KEY не может быть null"), Objects.requireNonNull(username, "Username не может быть null"))

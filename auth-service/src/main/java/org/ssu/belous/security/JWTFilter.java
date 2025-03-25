@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -26,10 +27,10 @@ public class JWTFilter extends OncePerRequestFilter {
     private static final String HEADER_NAME = "Authorization";
     private static final String USERNAME_KEY = "username";
     private final JWTService jwtService;
-    private final UserService userService;
+    private final UserDetailsService userService;
 
     @Autowired
-    public JWTFilter(JWTService jwtService, UserService userService) {
+    public JWTFilter(JWTService jwtService, UserDetailsService userService) {
         this.jwtService = jwtService;
         this.userService = userService;
     }

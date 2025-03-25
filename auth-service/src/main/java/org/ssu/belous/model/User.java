@@ -34,38 +34,4 @@ public class User {
     @NonNull
     @Column(name = "role")
     private String role;
-
-    @Setter
-    @NonNull
-    @Column(name = "name")
-    private String name;
-
-    @Setter
-    @NonNull
-    @Column(name = "second_name")
-    private String secondName;
-
-    @Setter
-    @NonNull
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Setter
-    @NonNull
-    @Column(name = "city")
-    private String city;
-
-    @Setter
-    @NonNull
-    @Column(name = "street")
-    private String street;
-
-    @Setter
-    @NonNull
-    @Column(name = "number_home")
-    private String number_home;
-
-    @Setter
-    @Column(name = "number_apartment")
-    private String number_apartment;
 }
