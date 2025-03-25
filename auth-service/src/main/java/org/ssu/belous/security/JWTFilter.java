@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.ssu.belous.exception.NotAcceptableHeaderException;
-import org.ssu.belous.service.UserService;
 
 import java.io.IOException;
 

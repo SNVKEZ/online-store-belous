@@ -6,10 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.ssu.belous.dto.request.CustomerInfoRequestDto;
-import org.ssu.belous.dto.request.RegistrationRequestDto;
-import org.ssu.belous.exception.UserAlreadyExistException;
 import org.ssu.belous.security.JWTService;
-import org.ssu.belous.security.helpers.JWTVerifier;
 import org.ssu.belous.service.CustomerService;
 
 @RestController

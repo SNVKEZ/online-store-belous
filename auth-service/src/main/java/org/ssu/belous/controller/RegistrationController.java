@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.ssu.belous.dto.request.RegistrationRequestDto;
 import org.ssu.belous.exception.UserAlreadyExistException;
 import org.ssu.belous.service.RegistrationService;
-import org.ssu.belous.service.UserService;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")

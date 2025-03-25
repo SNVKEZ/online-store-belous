@@ -2,7 +2,6 @@ package org.ssu.belous.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.ssu.belous.model.CustomerInfo;
-import org.ssu.belous.model.User;
 
 import java.util.UUID;
 

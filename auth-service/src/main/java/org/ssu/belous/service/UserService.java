@@ -4,16 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.ssu.belous.dto.request.RegistrationRequestDto;
-import org.ssu.belous.exception.UserAlreadyExistException;
 import org.ssu.belous.model.User;
 import org.ssu.belous.repository.UserRepository;
 import org.ssu.belous.security.AppUserDetails;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
