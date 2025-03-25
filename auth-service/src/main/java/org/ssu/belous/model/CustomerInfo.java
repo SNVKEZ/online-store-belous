@@ -13,7 +13,6 @@ import java.util.UUID;
 @Entity(name = "gen_customer_info")
 public class CustomerInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @NonNull
     @Column(nullable = false, name = "uuid")
     private UUID uuid;

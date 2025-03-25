@@ -18,12 +18,10 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 public class RegistrationController {
 
-    private final UserService userService;
     private final RegistrationService registrationService;
 
     @Autowired
-    public RegistrationController(UserService userService, RegistrationService registrationService) {
-        this.userService = userService;
+    public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
 

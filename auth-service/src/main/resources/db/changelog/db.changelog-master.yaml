@@ -31,3 +31,61 @@ databaseChangeLog:
       rollback:
         - dropTable:
             tableName: gen_user
+  - changeSet:
+      id: create-table-gen_customer_info
+      author: belous_dev
+      changes:
+        - createTable:
+            tableName: gen_customer_info
+            columns:
+              - column:
+                  name: uuid
+                  type: uuid
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: second_name
+                  type: varchar(100)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(100)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: city
+                  type: varchar(50)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: street
+                  type: varchar(100)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: number_home
+                  type: varchar(10)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: number_apartment
+                  type: varchar(6)
+                  constraints:
+                    unique: false
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: gen_customer_info

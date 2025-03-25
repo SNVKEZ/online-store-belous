@@ -1,6 +1,9 @@
 package org.ssu.belous.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,16 +33,16 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public Map<String,String> loginPage(@RequestBody AuthorizeRequestDto requestDto) {
+    public ResponseEntity<Map<String, String>> loginPage(@RequestBody AuthorizeRequestDto requestDto) {
 
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(requestDto.username(),requestDto.password());
         try {
             authenticationManager.authenticate(authToken);
         }catch (BadCredentialsException e){
-            return Map.of("message","Неверный логин или пароль");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Неверный логин или пароль"));
         }
 
         String token = jwtService.generateToken(requestDto.username(), userService.getRoleByUsername(requestDto.username()));
-        return Collections.singletonMap("jwt-token",token);
+        return ResponseEntity.ok(Collections.singletonMap("jwt-token", token));
     }
 }
