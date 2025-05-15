@@ -27,7 +27,7 @@ public class LoginController {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(requestDto.username(), requestDto.password());
         authenticationManager.authenticate(authToken);
         String token = jwtService.generateToken(requestDto.username(), userService.getRoleByUsername(requestDto.username()));
-        return ResponseEntity.ok(Collections.singletonMap("jwt-token", token));
+        return ResponseEntity.ok(Collections.singletonMap("Authorization", token));
     }
 
     @GetMapping("/refresh")
