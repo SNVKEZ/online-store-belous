@@ -10,12 +10,10 @@
   <name>online-store-belous</name>
   <url>http://maven.apache.org</url>
   <modules>
-    <module>order-service</module>
-    <module>payment-service</module>
-    <module>delivery-service</module>
-    <module>notification-service</module>
     <module>auth-service</module>
     <module>tests</module>
+    <module>inventory-service</module>
+    <module>order-service</module>
   </modules>
 
   <properties>
@@ -64,6 +62,11 @@
       <artifactId>jakarta.servlet-api</artifactId>
       <version>6.1.0</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka</artifactId>
+      <version>3.2.3</version>
     </dependency>
   </dependencies>
 </project>

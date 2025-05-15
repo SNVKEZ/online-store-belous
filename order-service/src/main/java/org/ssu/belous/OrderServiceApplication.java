@@ -2,10 +2,12 @@ package org.ssu.belous;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-public class OrderApplication {
+@EnableScheduling
+public class OrderServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(OrderApplication.class, args);
+        SpringApplication.run(OrderServiceApplication.class, args);
     }
 }
