@@ -43,4 +43,14 @@ public class CustomerService {
 
         customerRepository.save(customerInfo);
     }
+
+    @Transactional
+    public CustomerInfo getCustomerInfo(String username) {
+
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isEmpty()) throw new UsernameNotFoundException("Пользователь не найден");
+        UUID id = user.get().getUuid();
+
+        return customerRepository.findByUuid(id);
+    }
 }
