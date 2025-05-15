@@ -1,4 +1,11 @@
 package org.ssu.belous.dto.request;
 
-public record AuthorizeRequestDto(String username, String password) {
+import jakarta.validation.constraints.NotNull;
+
+public record AuthorizeRequestDto(
+        @NotNull
+        String username,
+
+        @NotNull
+        String password) {
 }

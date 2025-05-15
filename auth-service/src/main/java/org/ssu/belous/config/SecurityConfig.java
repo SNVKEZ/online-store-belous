@@ -28,6 +28,7 @@ public class SecurityConfig {
     private final UserService userService;
     private static final String LOGIN_URL = "/api/auth/login/**";
     private static final String REGISTER_URL = "/api/auth/registration/**";
+    private static final String REFRESH_URL = "/api/auth/refresh/**";
 
     @Autowired
     public SecurityConfig(JWTFilter jwtFilter, UserService userService) {
@@ -43,7 +44,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeHttpRequests(auth -> {
-                    auth.requestMatchers(LOGIN_URL, REGISTER_URL, "/")
+                    auth.requestMatchers(LOGIN_URL, REGISTER_URL, REFRESH_URL, "/")
                             .permitAll();
                     auth.anyRequest().authenticated();
                 })
