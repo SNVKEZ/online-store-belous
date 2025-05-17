@@ -23,20 +23,20 @@ public class OutboxEvent {
     private UUID id;
 
     @Column(nullable = false)
-    private String aggregateType; // Например, "Order"
+    private String aggregateType;
 
     @Column(nullable = false)
-    private String aggregateId;   // ID агрегата (Order ID)
+    private String aggregateId;
 
     @Column(nullable = false)
-    private String type;         // Тип события, например "OrderCreated"
+    private String type;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String payload;      // JSON с деталями события
+    private String payload;
 
     @Column(nullable = false)
     private Instant createdAt;
 
     @Column(nullable = false)
-    private boolean published;   // Флаг публикации события
+    private boolean published;
 }
