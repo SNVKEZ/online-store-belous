@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-inventory
+      author: belous_dev
+      changes:
+        - createTable:
+            tableName: inventory
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: product
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: integer
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: inventory

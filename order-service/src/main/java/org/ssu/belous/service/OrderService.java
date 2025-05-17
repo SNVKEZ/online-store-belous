@@ -10,6 +10,8 @@ import org.ssu.belous.repository.OrderRepository;
 import org.ssu.belous.repository.OutboxEventRepository;
 
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -20,7 +22,7 @@ public class OrderService {
     private final OutboxEventRepository outboxRepository;
     private final ObjectMapper objectMapper;
 
-    public Order createOrder(String product, String quantity) {
+    public Order createOrder(String product, int quantity) {
         Order order = Order.builder()
                 .id(UUID.randomUUID())
                 .product(product)
@@ -32,25 +34,30 @@ public class OrderService {
         orderRepository.save(order);
 
         try {
-            String payload = objectMapper.writeValueAsString(order);
+            Map<String, Object> event = new HashMap<>();
+            event.put("type", "OrderCreated");
 
-            OutboxEvent event = OutboxEvent.builder()
+            Map<String, Object> payload = new HashMap<>();
+            payload.put("id", order.getId().toString());
+            payload.put("product", product);
+            payload.put("quantity", quantity);
+            event.put("payload", payload);
+
+            OutboxEvent outboxEvent = OutboxEvent.builder()
                     .id(UUID.randomUUID())
                     .aggregateType("Order")
                     .aggregateId(order.getId().toString())
                     .type("OrderCreated")
-                    .payload(payload)
+                    .payload(objectMapper.writeValueAsString(event))
                     .createdAt(Instant.now())
                     .published(false)
                     .build();
 
-            outboxRepository.save(event);
+            outboxRepository.save(outboxEvent);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to serialize order", e);
+            throw new RuntimeException(e);
         }
 
         return order;
     }
-
-    // Можно добавить методы для обновления статуса заказа и генерации событий аналогично
 }

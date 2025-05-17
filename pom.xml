@@ -11,9 +11,10 @@
   <url>http://maven.apache.org</url>
   <modules>
     <module>auth-service</module>
-    <module>tests</module>
-    <module>inventory-service</module>
     <module>order-service</module>
+    <module>payment-service</module>
+    <module>inventory-service</module>
+    <module>security-lib</module>
   </modules>
 
   <properties>

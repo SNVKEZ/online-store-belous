@@ -16,11 +16,11 @@ databaseChangeLog:
                   name: product
                   type: varchar(255)
                   constraints:
-                    unique: true
+                    unique: false
                     nullable: false
               - column:
                   name: quantity
-                  type: varchar(255)
+                  type: integer
                   constraints:
                     nullable: false
               - column:

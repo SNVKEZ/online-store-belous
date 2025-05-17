@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-payments
+      author: belous_dev
+      changes:
+        - createTable:
+            tableName: payments
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: order_id
+                  type: uuid
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: success
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: paid_at
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: payments

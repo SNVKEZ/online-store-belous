@@ -26,10 +26,10 @@ public class Order {
     private String product;
 
     @Column(nullable = false)
-    private String quantity;
+    private int quantity;
 
     @Column(nullable = false)
-    private String status; // CREATED, PAID, FAILED
+    private String status;
 
     @Column(nullable = false)
     private Instant createdAt;

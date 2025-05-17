@@ -10,12 +10,12 @@ import org.ssu.belous.repository.OutboxEventRepository;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j  // Убедитесь, что у вас есть аннотация @Slf4j для логгирования
+@Slf4j
 public class KafkaPublisherScheduler {
     private final OutboxEventRepository outboxRepository;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 2000)
     @Transactional
     public void publishEvents() {
         outboxRepository.findAllByPublishedFalse().forEach(event -> {
@@ -25,13 +25,13 @@ public class KafkaPublisherScheduler {
                             if (ex == null) {
                                 event.setPublished(true);
                                 outboxRepository.save(event);
-                                log.info("Successfully sent event {}", event.getId());
+                                log.info("Ивент отправлен {}", event.getId());
                             } else {
-                                log.error("Failed to send event {}", event.getId(), ex);
+                                log.error("Ошибка отправления ивента {}", event.getId(), ex);
                             }
                         });
             } catch (Exception e) {
-                log.error("Error processing event {}", event.getId(), e);
+                log.error("Ошибка {}", event.getId(), e);
             }
         });
     }
