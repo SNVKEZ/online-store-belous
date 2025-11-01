@@ -145,7 +145,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>ru.ifellow.lab.AuthApplication</mainClass>
+                    <mainClass>org.ssu.belous.AuthApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,48 +1,50 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.5.1
-    container_name: zookeeper
-    ports:
-      - "2181:2181"
+  postgres:
+    image: postgres:16
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+      POSTGRES_DB: online_store
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
 
-  kafka:
-    image: confluentinc/cp-kafka:7.5.1
-    container_name: kafka
+  auth-service:
+    build:
+      context: .                   # ⬅ теперь контекст — корень
+      dockerfile: auth-service/Dockerfile
+    ports:
+      - "8081:8081"
     depends_on:
-      - zookeeper
-    ports:
-      - "9092:9092"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      - postgres
 
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
-      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-
-  postgres-payment:
-    image: postgres:15
-    restart: always
+  order-service:
+    build:
+      context: .
+      dockerfile: order-service/Dockerfile
     ports:
-      - "5433:5432"
-    environment:
-      POSTGRES_DB: paymentservice
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 0000
+      - "8082:8082"
+    depends_on:
+      - postgres
+      - auth-service
 
-  postgres-inventory:
-    image: postgres:15
-    restart: always
+  payment-service:
+    build:
+      context: .
+      dockerfile: payment-service/Dockerfile
     ports:
-      - "5434:5432"
-    environment:
-      POSTGRES_DB: inventoryservice
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 0000
+      - "8083:8083"
+    depends_on:
+      - postgres
+      - auth-service
+
+  inventory-service:
+    build:
+      context: .
+      dockerfile: inventory-service/Dockerfile
+    ports:
+      - "8084:8084"
+    depends_on:
+      - postgres
+      - auth-service

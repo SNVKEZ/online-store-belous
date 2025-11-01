@@ -1,5 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.ifellow.belous</groupId>
@@ -9,33 +12,53 @@
 
   <name>online-store-belous</name>
   <url>http://maven.apache.org</url>
+
+  <!-- 👇 ОБЯЗАТЕЛЬНО: сначала общие модули, потом сервисы -->
   <modules>
+    <module>security-lib</module>
     <module>auth-service</module>
     <module>order-service</module>
     <module>payment-service</module>
     <module>inventory-service</module>
-    <module>security-lib</module>
   </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>3.3.5</spring.version>
     <maven.compiler.release>17</maven.compiler.release>
+    <spring.version>3.3.5</spring.version>
   </properties>
 
+  <!-- 👇 Общие зависимости, которые будут унаследованы сервисами -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
+    <!-- Unit-тесты -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>5.9.2</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- База данных -->
     <dependency>
       <groupId>org.postgresql</groupId>
-      <version>42.7.2</version>
       <artifactId>postgresql</artifactId>
+      <version>42.7.2</version>
       <scope>runtime</scope>
     </dependency>
+
+    <!-- Утилиты -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -43,31 +66,34 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- Spring Boot -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
-      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
-      <version>${spring.version}</version>
     </dependency>
+
+    <!-- Kafka -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <version>${spring.version}</version>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka</artifactId>
+      <version>3.2.3</version>
     </dependency>
+
+    <!-- Servlet API -->
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
       <version>6.1.0</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>org.springframework.kafka</groupId>
-      <artifactId>spring-kafka</artifactId>
-      <version>3.2.3</version>
-    </dependency>
   </dependencies>
+
 </project>
