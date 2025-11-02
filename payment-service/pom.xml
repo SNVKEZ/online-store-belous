@@ -5,6 +5,7 @@
         <groupId>org.ifellow.belous</groupId>
         <artifactId>online-store-belous</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>payment-service</artifactId>
@@ -30,11 +31,6 @@
             <artifactId>rest-assured</artifactId>
             <version>5.5.0</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>4.17.0</version>
         </dependency>
 
         <dependency>
@@ -144,7 +140,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>ru.ifellow.lab.AuthApplication</mainClass>
+                    <mainClass>org.ssu.belous.PaymentServiceApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
