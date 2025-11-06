@@ -27,4 +27,7 @@ public class Inventory {
 
     @Column(nullable = false)
     private int quantity;
+
+    @Column(nullable = false)
+    private double cost;
 }

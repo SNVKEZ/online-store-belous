@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.ssu.belous.dto.AddInventoryCost;
 import org.ssu.belous.dto.AddInventoryRequestDto;
 import org.ssu.belous.model.Inventory;
 import org.ssu.belous.repository.InventoryRepository;
@@ -77,6 +78,21 @@ public class InventoryService {
         }
 
         inventoryRepository.save(inventory);
+        return inventory;
+    }
+
+    @Transactional
+    public Inventory updateCost(AddInventoryCost addInventoryCost) {
+        Optional<Inventory> optionalInventory = inventoryRepository.findByProduct(addInventoryCost.product());
+
+        if (optionalInventory.isEmpty()) {
+            throw new RuntimeException("Товар не найден: " + addInventoryCost.product());
+        }
+
+        Inventory inventory = optionalInventory.get();
+        inventory.setCost(addInventoryCost.cost());
+        inventoryRepository.save(inventory);
+
         return inventory;
     }
 }

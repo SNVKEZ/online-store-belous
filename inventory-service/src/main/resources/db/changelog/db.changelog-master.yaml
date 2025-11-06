@@ -23,6 +23,11 @@ databaseChangeLog:
                   type: integer
                   constraints:
                     nullable: false
+              - column:
+                  name: cost
+                  type: double precision
+                  constraints:
+                    nullable: false
       rollback:
         - dropTable:
             tableName: inventory
